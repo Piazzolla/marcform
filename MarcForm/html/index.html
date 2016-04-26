@@ -1,24 +1,65 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Formulario de Data Entry MARC</title>
 	<!-- <script type="text/javascript" src="../lib/angular.min.js"></script> -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script type="text/javascript" src="../app/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body ng-app="marcform">
-	<div ng-controller="DemoController">
+<form ng-submit="post.sumbitBook()">
+<!-- 	<div ng-controller="DemoController">
 	    <input type="text" ng-model="name">
 	    <p>Hello, {{name}}</p>
 	</div>
 	<div ng-controller="ListCtrl as list">
-		<p ng-repeat="message in list.messages">{{message.id}}: {{ message.text }}</p>
+		<div ng-repeat="message in list.messages">
+			<p>{{message.id}}: {{ message.text }}</p>
+			<input type="text"/>
+		</div>
 	</div>
 	<div ng-controller="PostCtrl as post">
-	<form ng-submit="post.addMessage(post.newMessage)">
-		<input type="text" ng-model="post.newMessage"/>
-		<button type="submit">add message</button>
-	</form>
+		<input type="text" ng-model="post.newMessage"/
+>		<button type="submit">add message</button>
 	</div>
+ -->
+ 	<div>
+	 Ingrese un campo	
+	<select ng-model="select1" name="fieldSelect">
+		<option>International Standar Book Number ISBN</option>
+		<option>Nombre Personal Autor</option>
+		<option>Título e información del título.</option>
+		<option>Edición</option>
+		<option>Información de publicación</option>
+		<option>Descripción física</option>
+	</select>
+	<input name="fieldInput" type="text"> 
+	</div>
+	<div>
+	Ingrese un subcampo
+	<select ng-model="select2" name="subfieldSelect">
+		<option>0</option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+	</select>
+	<input name="subfieldInput" type="text"> 
+	</div
+>	<div>
+	Ingrese un segundo subcampo
+	<select ng-model="select3" name="subfieldSelect">
+		<option>0</option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+	</select>
+	<input name="subfieldInput" type="text"> 
+	</div>
+
+	<textarea id="formatPreview">
+		{{select1 }} {{ select2}}{{select3}}  
+	</textarea>
+</form>
 </body>
 </html>
