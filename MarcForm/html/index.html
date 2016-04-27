@@ -24,16 +24,16 @@
 >		<button type="submit">add message</button>
 	</div>
  -->
- 	<div>
+ 	<div ng-controller="DemoController">
 	 Ingrese un campo	
 	<select ng-model="select1" name="fieldSelect">
-		<option>International Standar Book Number ISBN</option>
-		<option>Nombre Personal Autor</option>
-		<option>Título e información del título.</option>
+		<option ng-repeat="elemento in codigoArray">{{elemento.nombre}}</option>
+<!--  		<option>Nombre Personal Autor</option>
+		<option>Título e información del título</option>
 		<option>Edición</option>
-		<option>Información de publicación</option>
-		<option>Descripción física</option>
-	</select>
+		<option>Información de Publicación</option>
+ 		<option>Descripción Física</option
+ --></select>
 	<input name="fieldInput" type="text"> 
 	</div>
 	<div>
@@ -45,8 +45,8 @@
 		<option>3</option>
 	</select>
 	<input name="subfieldInput" type="text"> 
-	</div
->	<div>
+	</div>
+	<div>
 	Ingrese un segundo subcampo
 	<select ng-model="select3" name="subfieldSelect">
 		<option>0</option>
@@ -57,9 +57,7 @@
 	<input name="subfieldInput" type="text"> 
 	</div>
 
-	<textarea id="formatPreview">
-		{{select1 }} {{ select2}}{{select3}}  
-	</textarea>
+	<textarea id="formatPreview">{{select1 | fieldFilter}} {{ select2}}{{select3}}	</textarea>
 </form>
 </body>
 </html>

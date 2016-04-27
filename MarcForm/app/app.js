@@ -1,19 +1,41 @@
 // declare a module
 var myAppModule = angular.module('marcform', []);
 
+//inicializar datos de diccionario
+var initCtrl = myAppModule.factory('initCtrl', function($scope){
+	// $scope.codigoArray = [];
+	// $scope.codigoArray.push({nombre: "International Standar Book Number ISBN", codigo:"020"});
+	// $scope.codigoArray.push({nombre: "Nombre Personal Autor", codigo: "100"});
+	// $scope.codigoArray.push({nombre: "Título e información del título", codigo: "245"});
+	// $scope.codigoArray.push({nombre: "Edición", codigo: "250"});
+	// $scope.codigoArray.push({nombre: "Información de Publicación", codigo: "260"});
+	// $scope.codigoArray.push({nombre: "Descripción Física", codigo: "300"});
+	// return $scope.codigoArray;
+	});
 
-//generar un filtro que sirva de diccionario para los códigos de marc
-myAppModule.filter('fieldFilter', function($scope) {
 
-	
+//filtro que usa diccionario para devolver los códigos de marc
+myAppModule.filter('fieldFilter', [ 'initCtrl', function($scope) {
+	return function(text){
+		var datarray = $scope.codigoArray;
 
-});
+		for(i=0; i< datarray.length; i++){
+			if(datarray.nombre === text){
+				return datarray.codigo;
+			}
+		}
+		return "000";
+	}
+}]);
 
-
-// configure the module.
-// in this example we will create a greeting filter
 myAppModule.controller('DemoController', ['$scope', function($scope){
-	$scope.name = 'blah';
+	$scope.codigoArray = [];
+	$scope.codigoArray.push({nombre: "International Standar Book Number ISBN", codigo:"020"});
+	$scope.codigoArray.push({nombre: "Nombre Personal Autor", codigo: "100"});
+	$scope.codigoArray.push({nombre: "Título e información del título", codigo: "245"});
+	$scope.codigoArray.push({nombre: "Edición", codigo: "250"});
+	$scope.codigoArray.push({nombre: "Información de Publicación", codigo: "260"});
+	$scope.codigoArray.push({nombre: "Descripción Física", codigo: "300"});
 	}]);	
 
 // service
