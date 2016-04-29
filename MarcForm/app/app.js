@@ -1,42 +1,35 @@
 // declare a module
 var myAppModule = angular.module('marcform', []);
 
-//inicializar datos de diccionario
-var initCtrl = myAppModule.factory('initCtrl', function($scope){
-	// $scope.codigoArray = [];
-	// $scope.codigoArray.push({nombre: "International Standar Book Number ISBN", codigo:"020"});
-	// $scope.codigoArray.push({nombre: "Nombre Personal Autor", codigo: "100"});
-	// $scope.codigoArray.push({nombre: "Título e información del título", codigo: "245"});
-	// $scope.codigoArray.push({nombre: "Edición", codigo: "250"});
-	// $scope.codigoArray.push({nombre: "Información de Publicación", codigo: "260"});
-	// $scope.codigoArray.push({nombre: "Descripción Física", codigo: "300"});
-	// return $scope.codigoArray;
-	});
 
+//diccionario de códigos marc
+myAppModule.controller('DemoController', function($scope){
+	codigoArray = [];
+	codigoArray.push({nombre: "International Standar Book Number ISBN", codigo:"020"});
+	codigoArray.push({nombre: "Nombre Personal Autor", codigo: "100"});
+	codigoArray.push({nombre: "Título e información del título", codigo: "245"});
+	codigoArray.push({nombre: "Edición", codigo: "250"});
+	codigoArray.push({nombre: "Información de Publicación", codigo: "260"});
+	codigoArray.push({nombre: "Descripción Física", codigo: "300"});
+	return codigoArray;
+	});	
 
 //filtro que usa diccionario para devolver los códigos de marc
-myAppModule.filter('fieldFilter', [ 'initCtrl', function($scope) {
+myAppModule.filter('fieldFilter', function() {
 	return function(text){
-		var datarray = $scope.codigoArray;
+//		var datarray = $scope.codigoArray;
+		console.log("text: " + text);
+		console.log("lenght: " + codigoArray.lenght);
 
-		for(i=0; i< datarray.length; i++){
-			if(datarray.nombre === text){
-				return datarray.codigo;
+		for(i=0; i< codigoArray.length; i++){
+			if(codigoArray[i].nombre === text){
+				return codigoArray[i].codigo;
 			}
 		}
 		return "000";
 	}
-}]);
+});
 
-myAppModule.controller('DemoController', ['$scope', function($scope){
-	$scope.codigoArray = [];
-	$scope.codigoArray.push({nombre: "International Standar Book Number ISBN", codigo:"020"});
-	$scope.codigoArray.push({nombre: "Nombre Personal Autor", codigo: "100"});
-	$scope.codigoArray.push({nombre: "Título e información del título", codigo: "245"});
-	$scope.codigoArray.push({nombre: "Edición", codigo: "250"});
-	$scope.codigoArray.push({nombre: "Información de Publicación", codigo: "260"});
-	$scope.codigoArray.push({nombre: "Descripción Física", codigo: "300"});
-	}]);	
 
 // service
 myAppModule.factory('messages', function(){

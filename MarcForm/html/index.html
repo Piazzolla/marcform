@@ -9,31 +9,11 @@
 </head>
 <body ng-app="marcform">
 <form ng-submit="post.sumbitBook()">
-<!-- 	<div ng-controller="DemoController">
-	    <input type="text" ng-model="name">
-	    <p>Hello, {{name}}</p>
-	</div>
-	<div ng-controller="ListCtrl as list">
-		<div ng-repeat="message in list.messages">
-			<p>{{message.id}}: {{ message.text }}</p>
-			<input type="text"/>
-		</div>
-	</div>
-	<div ng-controller="PostCtrl as post">
-		<input type="text" ng-model="post.newMessage"/
->		<button type="submit">add message</button>
-	</div>
- -->
- 	<div ng-controller="DemoController">
+ 	<div ng-controller="DemoController as diccionario">
 	 Ingrese un campo	
 	<select ng-model="select1" name="fieldSelect">
-		<option ng-repeat="elemento in codigoArray">{{elemento.nombre}}</option>
-<!--  		<option>Nombre Personal Autor</option>
-		<option>Título e información del título</option>
-		<option>Edición</option>
-		<option>Información de Publicación</option>
- 		<option>Descripción Física</option
- --></select>
+		<option ng-repeat="elemento in diccionario">{{elemento.nombre}}</option>
+	</select>
 	<input name="fieldInput" type="text"> 
 	</div>
 	<div>
@@ -56,8 +36,9 @@
 	</select>
 	<input name="subfieldInput" type="text"> 
 	</div>
-
-	<textarea id="formatPreview">{{select1 | fieldFilter}} {{ select2}}{{select3}}	</textarea>
+	<div>
+		<textarea id="formatPreview">{{select1 | fieldFilter}} {{ select2}}{{select3}}	</textarea>
+	</div>
 </form>
 </body>
 </html>
