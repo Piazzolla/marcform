@@ -38,6 +38,7 @@
 	<div>
 	<hr>
 		<p id="formatPreview" >{{select1.codigo}} {{select2}}{{select3}} ${{subcampos[0].select4}} {{subcampos[0].content}}</p>
+		<p ng-repeat="sc in subcampos track by $index" ng-if="$index > 0">${{subcampos[$index].select4}} {{subcampos[$index].content}}</p>
 	</div>
 </form>
 </body>
