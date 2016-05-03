@@ -3,34 +3,41 @@
 <head>
 	<title>Formulario de Data Entry MARC</title>
 	<!-- <script type="text/javascript" src="../lib/angular.min.js"></script> -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
 	<script type="text/javascript" src="../app/app.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body ng-app="marcform">
-<form ng-controller="MainCtrl">
+<form ng-controller="MainCtrl as ctrl">
+	<h2>Formulario para cargar registros MARC</h2>g
  	<div>
 	 Ingrese un campo	
 	<select ng-model="select1" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
 	</div>
 	<div>
 	Ingrese los indicadores
-	<select ng-model="select2" name="subfieldSelect">
-		<option>0</option>
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-	</select>
-	<select ng-model="select3" name="subfieldSelect">
-		<option>0</option>
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-	</select>
-	<input name="subfieldInput" type="text"> 
+	<select ng-model="select2" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
+	<select ng-model="select3" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
 	</div>
+	<div id="subcampo" ng-repeat="sc in subcampos track by $index" >
+		Seleccione un código de subcampo
+		<select ng-model="subcampos[$index].select4" name="subfieldSelect">
+			<option>a</option>
+			<option>b</option>
+			<option>c</option>
+			<option>d</option>	
+		</select>
+		<input name="subfieldInput" type="text" ng-model="subcampos[$index].content"> 
+	</div>
+	<div ng-controller="pgCtrl">
+		 <button id="another-btn" ng-click="addSubfield()">Nuevo subcampo</button>
+ 	</div>
 	<div>
-		<textarea id="formatPreview" >{{select1.codigo}} {{select2}}{{select3}}</textarea>
+		 <button id="another-btn" ng-click="addField()">Agregar Nuevo Campo</button>
+ 	</div>
+	<div>
+	<hr>
+		<p id="formatPreview" >{{select1.codigo}} {{select2}}{{select3}} ${{subcampos[0].select4}} {{subcampos[0].content}}</p>
 	</div>
 </form>
 </body>

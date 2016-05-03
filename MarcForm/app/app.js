@@ -3,7 +3,8 @@
 var myAppModule = angular.module('marcform', [])
 .controller('MainCtrl', ['$scope', 'DiccionarioService', function ($scope, DiccionarioService)  {
 	$scope.codigosMarc = DiccionarioService.getCodigosMarc();
-
+	$scope.subcodigosMarc = DiccionarioService.getSubcodigosMarc();
+	$scope.subcampos = [];
 }])
 //diccionario de códigos marc
 .factory('DiccionarioService', function() {
@@ -14,29 +15,27 @@ var myAppModule = angular.module('marcform', [])
 		{nombre: "Información de Publicación", codigo: "260"},
 		{nombre: "Descripción Física", codigo: "300"}];
 
+	var subcodigosMarc = ["#", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 	var getCodigosMarc = function() {
 		return codigosMarc;
 	};
 
+	var getSubcodigosMarc = function() {
+		return subcodigosMarc;
+	};
+
 	return {
-		getCodigosMarc: getCodigosMarc
+		getCodigosMarc: getCodigosMarc,
+		getSubcodigosMarc: getSubcodigosMarc
 	};
 });
 
-//filtro que usa diccionario para devolver los códigos de marc
-// myAppModule.filter('fieldFilter', function() {
-// 	return function(text){
-// //		var datarray = $scope.codigoArray;
-// 		console.log("text: " + text);
-// 		console.log("lenght: " + codigoArray.lenght);
+myAppModule.controller('pgCtrl', function($scope){
+		$scope.addSubfield = function() {
+			$scope.subcampos.push("");
+		}
+});
 
-// 		for(i=0; i< codigoArray.length; i++){
-// 			if(codigoArray[i].nombre === text){
-// 				return codigoArray[i].codigo;
-// 			}
-// 		}
-// 		return {"000"};
-// 	}
-// });
 
 })();
