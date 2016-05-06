@@ -10,8 +10,9 @@
 <body ng-app="marcform">
 <form ng-controller="MainCtrl as ctrl" ng-init="campos = []">
 	<h2>Formulario para cargar registros MARC</h2>
-	<div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index">
-	 	<div ng-init="campo.subcampos = []">
+	<div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index" ng-class-odd="'odd'" ng-class-even="'even'">
+ 	<span>
+		<div ng-init="campo.subcampos = []">
 		 Ingrese un campo	
 			<select ng-model="campo.select1" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
 		</div>
@@ -34,12 +35,13 @@
 			<button id="btn-agregar-subcampo" ng-click="addSubfield($parent.$index)">Nuevo subcampo</button>
 	 	</div>
 
+ 	</span>
 	</div> <!-- /campo -->
 	<div ng-controller="campoCtrl">
 		 <button id="btn-agregar-campo" ng-click="addField()">Agregar Nuevo Campo</button>
  	</div>
-	<div ng-repeat="campo in campos track by $index">
 	<hr>
+	<div ng-repeat="campo in campos track by $index">
 		<p id="formatPreview" >{{campo.select1.codigo}} {{campo.select2}}{{campo.select3}} ${{campo.subcampos[0].select4}} {{campo.subcampos[0].content}}</p>
 			<p ng-repeat="sc2 in campo.subcampos track by $index" ng-if="$index > 0">${{sc2.select4}} {{sc2.content}}</p>
 	</div>
