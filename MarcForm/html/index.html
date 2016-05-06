@@ -8,38 +8,44 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body ng-app="marcform">
-<form ng-controller="MainCtrl as ctrl">
-	<h2>Formulario para cargar registros MARC</h2>g
- 	<div>
-	 Ingrese un campo	
-	<select ng-model="select1" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
-	</div>
-	<div>
-	Ingrese los indicadores
-	<select ng-model="select2" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
-	<select ng-model="select3" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
-	</div>
-	<div id="subcampo" ng-repeat="sc in subcampos track by $index" >
+<form ng-controller="MainCtrl as ctrl" ng-init="campos = []">
+	<h2>Formulario para cargar registros MARC</h2>
+	<div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index">
+	 	<div ng-init="campo.subcampos = []">
+		 Ingrese un campo	
+			<select ng-model="campo.select1" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
+		</div>
+		<div>
+		Ingrese los indicadores
+			<select ng-model="campo.select2" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
+			<select ng-model="campo.select3" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
+		</div>
+	 	<div ng-repeat="sc in campo.subcampos track by $index">
 		Seleccione un código de subcampo
-		<select ng-model="subcampos[$index].select4" name="subfieldSelect">
-			<option>a</option>
-			<option>b</option>
-			<option>c</option>
-			<option>d</option>	
-		</select>
-		<input name="subfieldInput" type="text" ng-model="subcampos[$index].content"> 
-	</div>
-	<div ng-controller="pgCtrl">
-		 <button id="another-btn" ng-click="addSubfield()">Nuevo subcampo</button>
+			<select ng-model="sc.select4" name="subfieldSelect">
+				<option>a</option>
+				<option>b</option>
+				<option>c</option>
+				<option>d</option>	
+			</select>
+			<input name="subfieldInput" type="text" ng-model="sc.content"> 
+		</div>
+		<div ng-controller="subcampoCtrl">
+			<button id="btn-agregar-subcampo" ng-click="addSubfield($parent.$index)">Nuevo subcampo</button>
+	 	</div>
+
+	</div> <!-- /campo -->
+	<div ng-controller="campoCtrl">
+		 <button id="btn-agregar-campo" ng-click="addField()">Agregar Nuevo Campo</button>
  	</div>
-	<div>
-		 <button id="another-btn" ng-click="addField()">Agregar Nuevo Campo</button>
- 	</div>
-	<div>
+	<div ng-repeat="campo in campos track by $index">
 	<hr>
-		<p id="formatPreview" >{{select1.codigo}} {{select2}}{{select3}} ${{subcampos[0].select4}} {{subcampos[0].content}}</p>
-		<p ng-repeat="sc in subcampos track by $index" ng-if="$index > 0">${{subcampos[$index].select4}} {{subcampos[$index].content}}</p>
+		<p id="formatPreview" >{{campo.select1.codigo}} {{campo.select2}}{{campo.select3}} ${{campo.subcampos[0].select4}} {{campo.subcampos[0].content}}</p>
+			<p ng-repeat="sc2 in campo.subcampos track by $index" ng-if="$index > 0">${{sc2.select4}} {{sc2.content}}</p>
 	</div>
+	<div ng-controller="debugCtrl">
+		 <button id="btn-debug-campos" ng-click="mostrarCamposJson()">Mostrar JSON de Campos</button>
+ 	</div>
 </form>
 </body>
 </html>
