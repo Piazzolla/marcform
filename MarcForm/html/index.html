@@ -9,7 +9,6 @@
 </head>
 <body ng-app="marcform">
 <form ng-controller="MainCtrl as ctrl" ng-init="campos = []">
-	<h2>Formulario para cargar registros MARC</h2>
 	<div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index" ng-class-odd="'odd'" ng-class-even="'even'">
  	<span>
 		<div ng-init="campo.subcampos = []">
@@ -48,6 +47,10 @@
 	<div ng-controller="debugCtrl">
 		 <button id="btn-debug-campos" ng-click="mostrarCamposJson()">Mostrar JSON de Campos</button>
  	</div>
+ 		<div ng-controller="getJsonCtrl">
+		 <button id="btn-debug-getdata" ng-click="getJson()">Imprimir Json por consola</button>
+ 	</div>
+
 </form>
 </body>
 </html>

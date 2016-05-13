@@ -1,0 +1,50 @@
+[{
+	"dato": {
+		"codigo": "1"
+	}
+}, {
+	"dato": {
+		"codigo": "3"
+	}
+}, {
+	"dato": {
+		"codigo": "8"
+	}
+}, {
+	"dato": {
+		"codigo": "20",
+		"subcodigo": [{
+			"sc": "a"
+		}]
+	}
+}, {
+	"dato": {
+		"codigo": "40",
+		"subcodigo": [{
+			"sc": "a"
+		}]
+	}
+}, {
+	"dato": {
+		"codigo": "41",
+		"subcodigo": [{
+			"sc": "a",
+			"sc": "b"
+		}]
+	}
+}, {
+	"dato": {
+		"codigo": "80",
+		"subcodigo": [{
+			"sc": "a",
+			"sc": "x"
+		}]
+	}
+}, {
+	"dato": {
+		"codigo": "82",
+		"subcodigo": [{
+			"sc": "a"
+		}]
+	}
+}]
