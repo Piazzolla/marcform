@@ -61,13 +61,11 @@ myAppModule.controller('getJsonCtrl', function($scope, $http) {
 		$http.get('../data/template.json',  {headers: { 'Accept': 'application/json' }})
 		.then(function(res){
 			$scope.template = res.data;
-//			console.log("DESPUÉS DEL GET");
-//			$scope.template  = [{"dato": {"codigo": "1"}}, {"dato": {"codigo": "3"}}];
-//			for(var i=0; i < $scope.template; i++){
-//            	console.log($scope.template[i].campo);
-//    		}
-			console.log(JSON.stringify($scope.template));
-			console.log("campo: " + $scope.template.campo);
+			console.log("Template length: " + $scope.template.length);
+			for(var i=0; i < $scope.template.length; i++){
+            	console.log("Dato número " + i +": " + $scope.template[i].dato.codigo);
+    		}
+//			console.log(JSON.stringify($scope.template));
 
 		});
 	}
