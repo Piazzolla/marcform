@@ -35,14 +35,14 @@ var myAppModule = angular.module('marcform', [])
 myAppModule.controller('subcampoCtrl', function($scope){
 		$scope.addSubfield = function(camposIndex) {
 			console.log("índice de campo: " + camposIndex);
-			scdata = [];
+			var scdata = [];
 			$scope.campos[camposIndex].subcampos.push(scdata);
 		}
 });
 
 myAppModule.controller('campoCtrl', function($scope){
 		$scope.addField = function() {
-			subcampo = [];
+			var subcampo = [];
 			$scope.campos.push(subcampo);
 		}
 });

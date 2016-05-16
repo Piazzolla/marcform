@@ -1,3 +1,23 @@
 .odd {
 	 background-color: lightgray;
 }
+
+#divViewWrapper {
+}
+
+#divMainView {
+	width: 620px;
+	float: left;
+	padding: 15px;
+	border: 3px solid Green;
+	margin: 3px;
+}
+
+#divPreviewView {
+	width: 340px;
+	float: left;
+	padding: 15px;
+	border: 3px solid Green;
+	margin: 3px;
+}
+

@@ -8,7 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body ng-app="marcform">
+<div id="divViewWrapper">
 <form ng-controller="MainCtrl as ctrl" ng-init="campos = []">
+<div id="divMainView">
 	<div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index" ng-class-odd="'odd'" ng-class-even="'even'">
  	<span>
 		<div ng-init="campo.subcampos = []">
@@ -39,9 +41,11 @@
 	<div ng-controller="campoCtrl">
 		 <button id="btn-agregar-campo" ng-click="addField()">Agregar Nuevo Campo</button>
  	</div>
-	<hr>
+
+</div> <!--divMainView -->
+<div id="divPreviewView">
 	<div ng-repeat="campo in campos track by $index">
-		<p id="formatPreview" >{{campo.select1.codigo}} {{campo.select2}}{{campo.select3}} ${{campo.subcampos[0].select4}} {{campo.subcampos[0].content}}</p>
+		<p id="pFormatPreview" >{{campo.select1.codigo}} {{campo.select2}}{{campo.select3}} ${{campo.subcampos[0].select4}} {{campo.subcampos[0].content}}</p>
 			<p ng-repeat="sc2 in campo.subcampos track by $index" ng-if="$index > 0">${{sc2.select4}} {{sc2.content}}</p>
 	</div>
 	<div ng-controller="debugCtrl">
@@ -50,7 +54,8 @@
  		<div ng-controller="getJsonCtrl">
 		 <button id="btn-debug-getdata" ng-click="getJson()">Imprimir Json por consola</button>
  	</div>
-
+</div>
 </form>
+</div> <!-- divViewWrapper -->
 </body>
 </html>
