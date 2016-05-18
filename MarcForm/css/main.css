@@ -21,3 +21,10 @@
 	margin: 3px;
 }
 
+.fix-to-top {
+	/* divMainView width * 100 / (divPreviewView width + borderS + marginS) */
+	transform: translateX( 176%); 
+    position: fixed;
+    top: 0;
+}
+

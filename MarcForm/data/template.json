@@ -1,9 +1,9 @@
 [{
-	"dato": {
-		"codigo": "1"
-	}
-}, {
-	"dato": {
+	"dato": 
+		{"codigo": "1"}
+	
+}, { 
+	"dato":  {
 		"codigo": "3"
 	}
 }, {
