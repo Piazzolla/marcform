@@ -2,7 +2,7 @@
 	 background-color: lightgray;
 }
 
-#divViewWrapper {
+/*#divViewWrapper {
 }
 
 #divMainView {
@@ -23,8 +23,9 @@
 
 .fix-to-top {
 	/* divMainView width * 100 / (divPreviewView width + borderS + marginS) */
-	transform: translateX( 176%); 
+/*	transform: translateX( 176%); 
     position: fixed;
     top: 0;
 }
 
+*/
