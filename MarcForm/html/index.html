@@ -1,45 +1,65 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-	<title>Formulario de Data Entry MARC</title>
-	<!-- <script type="text/javascript" src="../lib/angular.min.js"></script> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<!-- 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
- -->	
-  <!-- Angular Material requires Angular.js Libraries -->
-
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-
-
-
- 	<script src="../lib/acute/acute.select/acute.select.js"></script>
-	<script type="text/javascript" src="../app/app.js"></script>
-	<script type="text/javascript" src="../app/searchselect.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <title>Formulario de Data Entry MARC</title>
+    <!-- <script type="text/javascript" src="../lib/angular.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <!-- 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+ -->
+    <!-- Angular Material requires Angular.js Libraries -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    <script src="../lib/acute/acute.select/acute.select.js"></script>
+    <script type="text/javascript" src="../app/app.js"></script>
+    <script type="text/javascript" src="../app/searchselect.js"></script>
+    <script type="text/javascript" src="../lib/FileSaver.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
+
 <body ng-app="marcform">
-<h2>Formulario MARC</h2>
-
-<form ng-controller="MainCtrl as ctrl" ng-init="campos = []">
-<div id="divViewWrapper" layout="row" layout-xs="column">
-<div flex id="divMainView">
-<!-- 	<ac-select ac-model="selectedColour" ac-options="c.name for c in colours" 
+    <h2>Formulario MARC</h2>
+    <form ng-controller="MainCtrl as ctrl">
+        <div id="divViewWrapper" layout="row" layout-xs="column">
+            <div flex id="divMainView">
+                <!-- 	<ac-select ac-model="selectedColour" ac-options="c.name for c in colours" 
  	   ac-change="colourChanged(value)" ng-value="Hola"></ac-select> <!-- todo: remove -->
-
-	<div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index" ng-class-odd="'odd'" ng-class-even="'even'">
- 	<span>
+                <div ng-repeat="campo in campos track by $index" ng-init="camposIndex = $index" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <span>
 		<div ng-init="campo.subcampos = []">
 		 Campo	
-			<select ng-model="campo.codigo" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
+	<!-- 		<select ng-model="campo.codigo" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
+ -->
+
+		<div flex ng-controller="DemoCtrl as ctrldemo" layout="column" ng-cloak >
+		  <md-content class="md-padding">
+<!-- 				<input name="campoInput" type="text" ng-model="campo.codigo" aw-limit-length="3">  		
+ -->				
+ 				<md-autocomplete
+		          ng-disabled="ctrldemo.isDisabled"
+		          md-no-cache="ctrldemo.noCache"
+		          md-selected-item="ctrldemo.selectedItem"
+		          md-search-text-change="ctrldemo.searchTextChange(ctrldemo.searchText)"
+		          md-search-text="ctrldemo.searchText"
+		          md-selected-item-change="ctrldemo.selectedItemChange(item, $index)"
+		          md-items="item in ctrldemo.querySearch(ctrldemo.searchText)"
+		          md-item-text="item.display"
+		          md-min-length="0"
+		          placeholder="Seleccione un nombre de campo">
+		        <md-item-template>
+		          <span md-highlight-text="ctrldemo.searchText" md-highlight-flags="^i">{{item.display}}</span>
+		        </md-item-template>
+			    </md-autocomplete>
+		  </md-content>
 		</div>
+ 		</div>
 		<div>
 		Indicadores
 			<select ng-model="campo.indicador1" name="subfieldSelect" ng-options="item for item in subcodigosMarc"></select>
@@ -48,10 +68,27 @@
 	 	<div ng-repeat="sc in campo.subcampos track by $index">
 		Subcampo
 			<select ng-model="sc.subcodigo" name="subfieldSelect">
+				<option>3</option>
+				<option>8</option>
 				<option>a</option>
 				<option>b</option>
 				<option>c</option>
 				<option>d</option>	
+				<option>e</option>	
+				<option>f</option>	
+				<option>g</option>	
+				<option>h</option>	
+				<option>j</option>
+				<option>k</option>	
+				<option>n</option>	
+				<option>p</option>	
+				<option>q</option>	
+				<option>u</option>	
+				<option>t</option>	
+				<option>v</option>
+				<option>w</option>	
+				<option>x</option>	
+				<option>z</option>	
 			</select>
 			<input name="subfieldInput" type="text" ng-model="sc.content"> 
 		</div>
@@ -59,30 +96,31 @@
 			<md-button class="md-raised" id="btn-agregar-subcampo" ng-click="addSubfield($parent.$index)">Nuevo subcampo</md-button>
 	 	</div>
  	</span>
-	</div> <!-- /campo -->
-	<div ng-controller="campoCtrl">
-		 <md-button class="md-raised" id="btn-agregar-campo" ng-click="addField()">Agregar Nuevo Campo</md-button>
- 	</div>
-
-</div> <!--divMainView -->
-<!--  <div flex id="divPreviewView" set-class-when-at-top="fix-to-top"> -->
-<div flex id="divPreviewView" >
-	<div ng-repeat="campo in campos track by $index">
-		<p id="pFormatPreview" >{{campo.codigo.codigo}} {{campo.indicador1}}{{campo.indicador2}} ${{campo.subcampos[0].subcodigo}} {{campo.subcampos[0].content}}</p>
-			<p ng-repeat="sc2 in campo.subcampos track by $index" ng-if="$index > 0">${{sc2.subcodigo}} {{sc2.content}}</p>
-	</div>
-	<div ng-controller="debugCtrl">
-		 <md-button class="md-raised" id="btn-debug-campos" ng-click="mostrarCamposJson()">Mostrar JSON de Campos</md-button>
- 	</div>
- 		<div ng-controller="getJsonCtrl">
-		 <md-button class="md-raised" id="btn-debug-getdata" ng-click="getJson()">Imprimir Json por consola</md-button>
- 	</div>
-</div>
-</div> <!-- divViewWrapper -->
-</form>
-
-<!--**********************prueba de select autocomplete***********************************-->
-<div flex ng-controller="DemoCtrl as ctrldemo" layout="column" ng-cloak>
+                </div>
+                <!-- /campo -->
+                <div ng-controller="campoCtrl">
+                    <md-button class="md-raised" id="btn-agregar-campo" ng-click="addField()">Agregar Nuevo Campo</md-button>
+                </div>
+            </div>
+            <!--divMainView -->
+            <!--  <div flex id="divPreviewView" set-class-when-at-top="fix-to-top"> -->
+            <div flex id="divPreviewView">
+                <div ng-repeat="campo in campos track by $index">
+                    <p id="pFormatPreview">{{campo.codigo}} {{campo.indicador1}}{{campo.indicador2}} ${{campo.subcampos[0].subcodigo}} {{campo.subcampos[0].content}}</p>
+                    <p ng-repeat="sc2 in campo.subcampos track by $index" ng-if="$index > 0">{{campo.codigo}} {{campo.indicador1}}{{campo.indicador2}} ${{sc2.subcodigo}} {{sc2.content}}</p>
+                </div>
+                <div ng-controller="debugCtrl">
+                    <md-button class="md-raised" id="btn-debug-campos" ng-click="mostrarCamposJson()">Mostrar JSON de Campos</md-button>
+                </div>
+                <div ng-controller="getJsonCtrl">
+                    <md-button class="md-raised" id="btn-debug-getdata" ng-click="grabarArchivo()">Grabar archivo</md-button>
+                </div>
+            </div>
+        </div>
+        <!-- divViewWrapper -->
+    </form>
+    <!--**********************prueba de select autocomplete***********************************-->
+    <!-- <div flex ng-controller="DemoCtrl as ctrldemo" layout="column" ng-cloak>
   <md-content class="md-padding">
       <p>Use <code>md-autocomplete</code> to search for matches from local or remote data sources.</p>
       <md-autocomplete
@@ -110,7 +148,8 @@
       <md-checkbox ng-model="ctrldemo.isDisabled">Disable the input?</md-checkbox>
       <p>By default, <code>md-autocomplete</code> will cache results when performing a query.  After the initial call is performed, it will use the cached results to eliminate unnecessary server requests or lookup logic. This can be disabled above.</p>
   </md-content>
-</div>
-<!--*********************************************************-->
+</div> -->
+    <!--*********************************************************-->
 </body>
+
 </html>
