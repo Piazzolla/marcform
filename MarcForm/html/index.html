@@ -37,6 +37,7 @@
 		 Campo	
 	<!-- 		<select ng-model="campo.codigo" name="fieldSelect" ng-options="entrada.nombre for entrada in codigosMarc"></select>
  -->
+ 		          <!-- md-items="item in ctrldemo.querySearch(ctrldemo.searchText)" -->
 
 		<div flex ng-controller="DemoCtrl as ctrldemo" layout="column" ng-cloak >
 		  <md-content class="md-padding">
@@ -49,7 +50,7 @@
 		          md-search-text-change="ctrldemo.searchTextChange(ctrldemo.searchText)"
 		          md-search-text="ctrldemo.searchText"
 		          md-selected-item-change="ctrldemo.selectedItemChange(item, $index)"
-		          md-items="item in ctrldemo.querySearch(ctrldemo.searchText)"
+ 		          md-items="item in ctrldemo.querySearch(ctrldemo.searchText) | filter: ctrldemo.searchText"
 		          md-item-text="item.display"
 		          md-min-length="0"
 		          placeholder="Seleccione un nombre de campo">
